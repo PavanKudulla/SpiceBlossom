@@ -1,0 +1,494 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice Blossom - Premium Dining Experience</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B0000',
+                        secondary: '#D4AF37'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+        .hero-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+        }
+        .premium-shadow {
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.1);
+        }
+        .gold-glow {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        .carousel-container {
+            scroll-snap-type: x mandatory;
+        }
+        .carousel-item {
+            scroll-snap-align: start;
+        }
+        .menu-overlay {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .signature-script {
+            font-family: 'Pacifico', cursive;
+        }
+    </style>
+</head>
+<body class="bg-white font-['Inter'] smooth-scroll">
+    <header class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <img src="{% static 'assets/images/SBLogo.jpg' %}" 
+                 alt="Spice Blossom Logo" 
+                 class="h-12">
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">Home</a>
+                <a href="#menu" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">Menu</a>
+                <a href="#about" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">About</a>
+                <a href="#contact" class="nav-link text-white hover:text-secondary transition-colors duration-300 font-medium">Contact</a>
+            </div>
+      <button
+          id="menu-toggle"
+          class="w-8 h-8 flex items-center justify-center cursor-pointer"
+        >
+          <i class="ri-menu-line text-white text-2xl"></i>
+        </button>
+      </nav>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 z-40 menu-overlay hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8">
+        <a
+          href="#home"
+          class="text-white text-2xl hover:text-secondary transition-colors duration-300 cursor-pointer"
+          >Home</a
+        >
+        <a
+          href="#menu"
+          class="text-white text-2xl hover:text-secondary transition-colors duration-300 cursor-pointer"
+          >Menu</a
+        >
+        <a
+          href="#about"
+          class="text-white text-2xl hover:text-secondary transition-colors duration-300 cursor-pointer"
+          >About</a
+        >
+        <a
+          href="#contact"
+          class="text-white text-2xl hover:text-secondary transition-colors duration-300 cursor-pointer"
+          >Contact</a
+        >
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.getElementById('navbar');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = menuToggle.querySelector('i');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-white', 'shadow-lg', 'backdrop-blur-md');
+                    navbar.classList.remove( 'bg-opacity-20');
+                    navLinks.forEach(link => {
+                        link.classList.add('text-gray-900');
+                        link.classList.remove('text-white');
+                    });
+                    menuIcon.classList.add('text-gray-900');
+                    menuIcon.classList.remove('text-white');
+                } else {
+                    navbar.classList.remove('bg-white', 'shadow-lg', 'backdrop-blur-md');
+                    navbar.classList.add('bg-opacity-20');
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-gray-900');
+                        link.classList.add('text-white');
+                    });
+                    menuIcon.classList.remove('text-gray-900');
+                    menuIcon.classList.add('text-white');
+                }
+            });
+
+          
+        });
+    </script>
+
+    <main>
+        <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div 
+            class="absolute inset-0 z-0"
+            style="
+                background-image: url('https://mocha-cdn.com/01985eb0-33d8-7aaa-88ea-dd5434288277/hero-background.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            "
+            >
+            <!-- Dark Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-red-900/40 to-red-950/70"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-red-900/30 to-amber-900/30"></div>
+            </div>
+
+            <div class="relative z-10 text-center px-4 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-['Playfair_Display'] font-bold text-[#FFD700] mb-6 gold-glow">
+                SPICE BLOSSOM: <span class="text-5xl md:text-7xl font-['Playfair_Display'] font-bold text-white mb-6"> Experience Culinary Excellence</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white mb-8 font-light leading-relaxed">
+                Where tradition meets innovation in an extraordinary dining journey
+            </p>
+            <div class="w-16 h-0.5 bg-primary mx-auto mb-8"></div>
+            <button class="bg-secondary text-black px-8 py-4 !rounded-button font-semibold text-lg hover:bg-opacity-90 transition-all duration-300 premium-shadow cursor-pointer">
+                Make a Reservation
+            </button>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold text-primary mb-4">
+                        Featured Selections
+                    </h2>
+                    <div class="w-16 h-0.5 bg-secondary mx-auto"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white premium-shadow !rounded-lg overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="relative overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Gourmet%20wagyu%20beef%20steak%20with%20truffle%20sauce%2C%20professional%20food%20photography%2C%20elegant%20plating%20on%20white%20porcelain%2C%20cinematic%20lighting%2C%20luxury%20restaurant%20presentation%2C%20rich%20textures%2C%20golden%20accents&width=400&height=300&seq=dish-1&orientation=landscape" 
+                                 alt="Wagyu Beef Tenderloin" 
+                                 class="w-full h-64 object-cover object-center">
+                            <div class="absolute inset-0 border-2 border-secondary opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-['Playfair_Display'] font-semibold text-primary mb-2">
+                                Wagyu Beef Tenderloin
+                            </h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Premium wagyu beef with truffle reduction, roasted vegetables, and gold leaf garnish
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-white premium-shadow !rounded-lg overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="relative overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Fresh%20lobster%20thermidor%20with%20saffron%20cream%20sauce%2C%20elegant%20fine%20dining%20presentation%2C%20professional%20food%20photography%2C%20luxurious%20plating%2C%20cinematic%20lighting%2C%20golden%20accents%2C%20white%20porcelain%20plate&width=400&height=300&seq=dish-2&orientation=landscape" 
+                                 alt="Lobster Thermidor" 
+                                 class="w-full h-64 object-cover object-center">
+                            <div class="absolute inset-0 border-2 border-secondary opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-['Playfair_Display'] font-semibold text-primary mb-2">
+                                Lobster Thermidor
+                            </h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Fresh Atlantic lobster with saffron cream sauce, herb butter, and seasonal microgreens
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-white premium-shadow !rounded-lg overflow-hidden hover:transform hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <div class="relative overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Chocolate%20souffl%C3%A9%20with%20gold%20leaf%20and%20berry%20compote%2C%20elegant%20dessert%20presentation%2C%20professional%20food%20photography%2C%20luxury%20plating%2C%20cinematic%20lighting%2C%20fine%20dining%20dessert%2C%20rich%20textures&width=400&height=300&seq=dish-3&orientation=landscape" 
+                                 alt="Chocolate Soufflé" 
+                                 class="w-full h-64 object-cover object-center">
+                            <div class="absolute inset-0 border-2 border-secondary opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-['Playfair_Display'] font-semibold text-primary mb-2">
+                                Chocolate Soufflé
+                            </h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Dark chocolate soufflé with vanilla bean ice cream and berry compote
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="py-20 bg-primary">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold text-secondary mb-4">
+                        Signature Dishes
+                    </h2>
+                    <div class="w-16 h-0.5 bg-secondary mx-auto"></div>
+                </div>
+                <div class="overflow-x-auto carousel-container">
+                    <div class="flex space-x-6 pb-4" style="width: max-content;">
+                        <div class="carousel-item bg-white !rounded-lg overflow-hidden premium-shadow" style="width: 300px;">
+                            <img src="https://readdy.ai/api/search-image?query=Pan-seared%20duck%20breast%20with%20cherry%20gastrique%2C%20professional%20food%20photography%2C%20elegant%20plating%2C%20cinematic%20lighting%2C%20luxury%20restaurant%20presentation%2C%20golden%20accents%2C%20fine%20dining&width=300&height=200&seq=signature-1&orientation=landscape" 
+                                 alt="Duck Breast" 
+                                 class="w-full h-48 object-cover object-center">
+                            <div class="p-6">
+                                <h3 class="text-xl font-['Playfair_Display'] font-semibold text-primary mb-2">
+                                    Pan-Seared Duck Breast
+                                </h3>
+                                <p class="text-secondary font-semibold text-lg">$48</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item bg-white !rounded-lg overflow-hidden premium-shadow" style="width: 300px;">
+                            <img src="https://readdy.ai/api/search-image?query=Grilled%20salmon%20with%20lemon%20herb%20crust%2C%20professional%20food%20photography%2C%20elegant%20plating%2C%20cinematic%20lighting%2C%20luxury%20restaurant%20presentation%2C%20golden%20accents%2C%20fine%20dining&width=300&height=200&seq=signature-2&orientation=landscape" 
+                                 alt="Grilled Salmon" 
+                                 class="w-full h-48 object-cover object-center">
+                            <div class="p-6">
+                                <h3 class="text-xl font-['Playfair_Display'] font-semibold text-primary mb-2">
+                                    Grilled Atlantic Salmon
+                                </h3>
+                                <p class="text-secondary font-semibold text-lg">$42</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item bg-white !rounded-lg overflow-hidden premium-shadow" style="width: 300px;">
+                            <img src="https://readdy.ai/api/search-image?query=Rack%20of%20lamb%20with%20rosemary%20jus%2C%20professional%20food%20photography%2C%20elegant%20plating%2C%20cinematic%20lighting%2C%20luxury%20restaurant%20presentation%2C%20golden%20accents%2C%20fine%20dining&width=300&height=200&seq=signature-3&orientation=landscape" 
+                                 alt="Rack of Lamb" 
+                                 class="w-full h-48 object-cover object-center">
+                            <div class="p-6">
+                                <h3 class="text-xl font-['Playfair_Display'] font-semibold text-primary mb-2">
+                                    Herb-Crusted Rack of Lamb
+                                </h3>
+                                <p class="text-secondary font-semibold text-lg">$52</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item bg-white !rounded-lg overflow-hidden premium-shadow" style="width: 300px;">
+                            <img src="https://readdy.ai/api/search-image?query=Risotto%20with%20wild%20mushrooms%20and%20truffle%20oil%2C%20professional%20food%20photography%2C%20elegant%20plating%2C%20cinematic%20lighting%2C%20luxury%20restaurant%20presentation%2C%20golden%20accents%2C%20fine%20dining&width=300&height=200&seq=signature-4&orientation=landscape" 
+                                 alt="Truffle Risotto" 
+                                 class="w-full h-48 object-cover object-center">
+                            <div class="p-6">
+                                <h3 class="text-xl font-['Playfair_Display'] font-semibold text-primary mb-2">
+                                    Wild Mushroom Risotto
+                                </h3>
+                                <p class="text-secondary font-semibold text-lg">$38</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-gray-900 relative">
+            <div class="absolute inset-0 opacity-10">
+                <img src="https://readdy.ai/api/search-image?query=Luxury%20restaurant%20interior%20with%20elegant%20dining%20room%2C%20warm%20ambient%20lighting%2C%20sophisticated%20decor%2C%20premium%20atmosphere%2C%20golden%20accents%2C%20fine%20dining%20establishment%20background&width=1920&height=1080&seq=about-bg&orientation=landscape" 
+                     alt="Restaurant Interior" 
+                     class="w-full h-full object-cover object-center">
+            </div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold text-secondary mb-8">
+                        Our Story
+                    </h2>
+                    <div class="w-16 h-0.5 bg-secondary mx-auto mb-8"></div>
+                    <p class="text-white text-lg leading-relaxed mb-8">
+                        For over two decades, <span class="text-secondary">Spice Blossom</span> has been a beacon of culinary excellence, 
+                        where traditional techniques meet innovative flavors. Our award-winning chefs craft each dish with passion, 
+                        using only the finest ingredients sourced from around the world.
+                    </p>
+                    <p class="text-white text-lg leading-relaxed mb-12">
+                        From our signature spice blends to our carefully curated wine selection, every element of your dining 
+                        experience is designed to create unforgettable memories in an atmosphere of refined elegance.
+                    </p>
+                    <div class="signature-script text-secondary text-3xl">
+                        Chef Marcus Wellington
+                    </div>
+                    <div class="w-24 h-0.5 bg-primary mx-auto mt-4"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold text-primary mb-4">
+                        Visit Us
+                    </h2>
+                    <div class="w-16 h-0.5 bg-secondary mx-auto"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="text-center">
+                        <div class="w-16 h-16 flex items-center justify-center bg-secondary !rounded-full mx-auto mb-4">
+                            <i class="ri-map-pin-line text-2xl text-black"></i>
+                        </div>
+                        <h3 class="text-xl font-['Playfair_Display'] font-semibold text-primary mb-2">Location</h3>
+                        <p class="text-gray-600">
+                            123 Culinary Boulevard<br>
+                            Downtown District<br>
+                            New York, NY 10001
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 flex items-center justify-center bg-secondary !rounded-full mx-auto mb-4">
+                            <i class="ri-phone-line text-2xl text-black"></i>
+                        </div>
+                        <h3 class="text-xl font-['Playfair_Display'] font-semibold text-primary mb-2">Reservations</h3>
+                        <p class="text-gray-600">
+                            (555) 123-4567<br>
+                            reservations@spiceblossom.com
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 flex items-center justify-center bg-secondary !rounded-full mx-auto mb-4">
+                            <i class="ri-time-line text-2xl text-black"></i>
+                        </div>
+                        <h3 class="text-xl font-['Playfair_Display'] font-semibold text-primary mb-2">Hours</h3>
+                        <p class="text-gray-600">
+                            Tuesday - Saturday<br>
+                            5:00 PM - 11:00 PM<br>
+                            Sunday: 4:00 PM - 10:00 PM
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <button class="bg-primary text-white px-8 py-4 !rounded-button font-semibold text-lg hover:bg-opacity-90 transition-all duration-300 premium-shadow cursor-pointer">
+                        Book Your Table
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="text-3xl font-['Pacifico']  text-[#FFD700]  mb-6 gold-glow">
+                    Spice Blossom
+                </div>
+                <div class="flex justify-center space-x-8 mb-8">
+                    <a href="#home" class="text-white hover:text-secondary transition-colors duration-300 cursor-pointer">Home</a>
+                    <a href="#menu" class="text-white hover:text-secondary transition-colors duration-300 cursor-pointer">Menu</a>
+                    <a href="#about" class="text-white hover:text-secondary transition-colors duration-300 cursor-pointer">About</a>
+                    <a href="#contact" class="text-white hover:text-secondary transition-colors duration-300 cursor-pointer">Contact</a>
+                </div>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <div class="w-10 h-10 flex items-center justify-center bg-secondary !rounded-full cursor-pointer hover:bg-opacity-80 transition-all duration-300">
+                        <i class="ri-facebook-fill text-black text-xl"></i>
+                    </div>
+                    <div class="w-10 h-10 flex items-center justify-center bg-secondary !rounded-full cursor-pointer hover:bg-opacity-80 transition-all duration-300">
+                        <i class="ri-instagram-fill text-black text-xl"></i>
+                    </div>
+                    <div class="w-10 h-10 flex items-center justify-center bg-secondary !rounded-full cursor-pointer hover:bg-opacity-80 transition-all duration-300">
+                        <i class="ri-twitter-fill text-black text-xl"></i>
+                    </div>
+                </div>
+                <div class="w-32 h-0.5 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-400 text-sm">
+                    © 2024 Spice Blossom. All rights reserved. | A culinary experience beyond compare.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script id="menu-toggle-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = menuToggle.querySelector('i');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'ri-menu-line text-white text-2xl';
+                } else {
+                    menuIcon.className = 'ri-close-line text-white text-2xl';
+                }
+            });
+            
+            const menuLinks = mobileMenu.querySelectorAll('a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.className = 'ri-menu-line text-white text-2xl';
+                });
+            });
+        });
+    </script>
+
+    <script id="smooth-scroll-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script id="reservation-buttons-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const reservationButtons = document.querySelectorAll('button');
+            
+            reservationButtons.forEach(button => {
+                if (button.textContent.includes('Reservation') || button.textContent.includes('Book')) {
+                    button.addEventListener('click', function() {
+                        const modal = document.createElement('div');
+                        modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50';
+                        modal.innerHTML = `
+                            <div class="bg-white p-8 !rounded-lg max-w-md w-full mx-4 premium-shadow">
+                                <h3 class="text-2xl font-['Playfair_Display'] font-bold text-primary mb-4">Make a Reservation</h3>
+                                <p class="text-gray-600 mb-6">Please call us at (555) 123-4567 or email reservations@spiceblossom.com to book your table.</p>
+                                <button class="bg-primary text-white px-6 py-3 !rounded-button font-semibold hover:bg-opacity-90 transition-all duration-300 cursor-pointer w-full">
+                                    Close
+                                </button>
+                            </div>
+                        `;
+                        
+                        document.body.appendChild(modal);
+                        
+                        const closeButton = modal.querySelector('button');
+                        closeButton.addEventListener('click', function() {
+                            document.body.removeChild(modal);
+                        });
+                        
+                        modal.addEventListener('click', function(e) {
+                            if (e.target === modal) {
+                                document.body.removeChild(modal);
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
